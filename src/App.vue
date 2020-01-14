@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <router-view/>
+    <b-container>
+      <b-row>
+        <b-col cols="12">
+          <router-view></router-view>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
