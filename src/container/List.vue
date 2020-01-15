@@ -2,7 +2,8 @@
     <div>
         <h1>COMENTO 과제 - 이해훈</h1>
         <div class="option-box">
-            <category />
+            <b-button v-on:click="toggleModal" v-b-modal.modal-1>필터</b-button>
+            <category :show="modalShow" :category="category" :filterCategory="filterCategory" :getBoards="getBoards" :toggleModal="toggleModal" v-on:filter="confirmFilter"/>
             <div class="sort-box">
                 <h5 v-on:click="toggleOrd" :class="{active: ord=='asc'}">오름차순</h5>
                 <h5 v-on:click="toggleOrd" :class="{active: ord=='desc'}">내림차순</h5>
@@ -36,13 +37,17 @@ export default {
             category : [],
             filterCategory : [1,2,3],
             ord : 'asc',
+            modalShow : false,
         }
     },
     created() {
-        this.getCategory();
+            this.getCategory();
+            this.$nextTick(function() {
+                this.getBoards();
+            })
     },
     mounted() {
-        this.getBoards();
+        // this.getBoards();
         // this.getSponsored();
     },
     watch : {
@@ -54,10 +59,18 @@ export default {
         pageLimit() {
             if (this.pageLimit !== 10) {this.getBoards();}
         },
+        filterCategory: function (newVal, oldVal) {
+            console.log('new val', newVal);
+            console.log('old val', oldVal);
+            if ( newVal !== oldVal ){
+                this.getBoards();
+            }
+        }
     },
     methods : {
         getCategory() {
             var self = this;
+            var tempCategory = [];
             this.$http.get(self.serverURL+`/api/category`)
             .then((response) => {
                 // SUCCESS
@@ -65,8 +78,9 @@ export default {
                 console.log('lits ?? :', self.list)
 
                 response.data.list.map((list) => (
-                    self.filterCategory.push(list.id)
+                    tempCategory.push(list.id)
                 ))
+                self.filterCategory = tempCategory;
                 console.log('filter category', self.filterCategory)
             })
         },
@@ -103,7 +117,6 @@ export default {
             .then((response) => {
                 // SUCCESS
                 that.ads = response.data.list.data[0]
-                // that.$forceUpdate();
             })
         },
         showMore() {
@@ -117,7 +130,13 @@ export default {
             } else if (ordName.textContent === "내림차순") {
                 self.ord = 'desc';
             }
-        }
+        },
+        toggleModal() {
+            this.modalShow = !this.modalShow;
+        },
+        confirmFilter(value) {
+            this.filterCategory = value;
+        },
     },
 }
 </script>

@@ -22,7 +22,11 @@ export default {
         return {
             imageURL : 'https://cdn.comento.kr/assignment/',
             isShow : false,
-            ads : {},
+            ads : {
+                img : "",
+                title : "",
+                contents : ""
+            },
             contents : "",
         }
     },
@@ -65,6 +69,18 @@ export default {
       display: -webkit-box; 
       -webkit-line-clamp: 4; 
       -webkit-box-orient: vertical;
+    }
+
+    @media all and ( max-width : 450px ){
+        .sponsored-container img {
+            width: -webkit-fill-available;
+        }
+        .flex-row {
+            flex-direction: column !important;
+        }
+        .card-body {
+            width: 100% !important;
+        }
     }
 }
 </style>

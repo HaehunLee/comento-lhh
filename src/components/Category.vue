@@ -1,14 +1,14 @@
 <template>
-<div>
+<div v-if="show">
     <div class="filter-box">
-        <b-button v-b-modal.modal-1>필터</b-button>
-
         <b-modal id="modal-1" title="필터" v-model="show" centered>
-            <div>
-                <input type="checkbox" />
-                <input type="checkbox" />
-                <input type="checkbox" />
-            </div>
+            <b-form-group>
+            <b-form-checkbox-group id="checkbox-group-2" v-model="selected" name="flavour-2">
+                <b-form-checkbox :value="category[0].id">{{category[0].name}}</b-form-checkbox>
+                <b-form-checkbox :value="category[1].id">{{category[1].name}}</b-form-checkbox>
+                <b-form-checkbox :value="category[2].id">{{category[2].name}}</b-form-checkbox>
+            </b-form-checkbox-group>
+            </b-form-group>
 
             <template v-slot:modal-footer>
                 <div class="w-100">
@@ -16,7 +16,7 @@
                     variant="primary"
                     size="sm"
                     class="float-right"
-                    @click="show=false"
+                    v-on:click="refreshFilter"
                 >
                     저장
                 </b-button>
@@ -29,9 +29,25 @@
 <script>
 export default {
     name : 'category',
+    props : {
+        show : Boolean,
+        category : Array,
+        filterCategory : Array,
+        getBoards : Function,
+        toggleModal : Function,
+    },
     data() {
         return {
-            show : false,
+            selected: this.filterCategory,
+        }
+    },
+    created() {
+        this.selected = this.filterCategory
+    },
+    methods : {
+        refreshFilter() {
+            this.$emit("filter",this.selected);
+            this.toggleModal();
         }
     }
 }
