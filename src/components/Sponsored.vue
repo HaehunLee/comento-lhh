@@ -1,4 +1,5 @@
 <template>
+    <!-- 광고글 Component -->
     <div v-if="isShow" class="sponsored-container">
         <h6 class="ads-title">Sponsored</h6>
         <b-card :img-src="imageURL+ads.img" img-alt="Card image" img-left class="rounded=0">
@@ -15,23 +16,23 @@
 export default {
     name : 'sponsored',
     props : {
-        turn : Number,
-        getSponsored : Function,
+        turn : Number,  // 게시글 index
+        getSponsored : Function,    // 광고글을 호출하는 api 함수
     },
     data() {
         return {
-            imageURL : 'https://cdn.comento.kr/assignment/',
-            isShow : false,
-            ads : {
-                img : "",
+            imageURL : 'https://cdn.comento.kr/assignment/',    // imageURL 등록
+            isShow : false, // 4번째일때 보이기 위한 변수
+            ads : { // 광고글 초기화
+                img : "",   // ******** 초기값 광고이미지 불러올 때의 에러 수정 실패...
                 title : "",
                 contents : ""
             },
-            contents : "",
         }
     },
     created() {
         var self = this;
+        // 4번째 게시글일 때 호출하여 보여주는 함수
         if (self.turn % 4 === 3) {
             self.isShow = true;
             self.getSponsored(self);
@@ -71,6 +72,7 @@ export default {
       -webkit-box-orient: vertical;
     }
 
+    // width 450px 이하일 때 반응형 css
     @media all and ( max-width : 450px ){
         .sponsored-container img {
             width: -webkit-fill-available;

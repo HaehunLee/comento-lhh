@@ -1,4 +1,5 @@
 <template>
+    <!-- 게시글 Component -->
     <div class="board-container">
         <b-card
         header-tag="header" 
@@ -36,6 +37,7 @@ export default {
         category :Array,
     },
     methods : {
+        // 카테고리 이름 변환 함수
         getCatName() {
             const categoryName = this.category.filter(
                 list => list.id === this.board.category_id

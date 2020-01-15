@@ -12,6 +12,7 @@ export default new Router({
       name: 'List',
       component: List
     },
+    // 미구현 시간부족, 능력부족
     // {
     //   path: '/detail',
     //   name: 'detail',

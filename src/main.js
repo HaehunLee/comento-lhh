@@ -8,9 +8,11 @@ import infiniteScroll from "vue-infinite-scroll";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-
+// 무한스크롤을 위한 라이브러리 등록
 Vue.use(infiniteScroll)
+// axios 전역사용 등록
 Vue.prototype.$http = axios
+// Bootstrap-vue 라이브러리 등록
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 

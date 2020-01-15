@@ -1,4 +1,37 @@
 # comento-lhh
+- comento practice
+- dev : 이해훈
+
+## Use Library
+
+<ol>
+    <li>vue-cli : vue 프로젝트 초기 설정 라이브러리
+    <li>axios : API 서버통신 라이브러리
+    <li>bootstrap, bootstrap-vue : bootstrap을 vue에서 사용하는 라이브러리
+    <li>vue-infinite-scroll : 무한 스크롤 라이브러리
+    <li>vue-router : router를 vue에서 사용하는 라이브러리 ( detail 미구현으로 미사용..)
+</ol>
+
+## Goal
+
+<table>
+
+| 달성 | 과업명 | 비고 |
+|---|:---:|---:|
+|`o`|광고 반응형|
+|`x`|크로스 브라우징|능력 부족|
+|`o`|리스트 불러오기|
+|`o`|정렬|
+|`o`|필터|
+|`o`|광고 삽입|
+|`x`|VOC(고객센터 접수건)|능력 부족|
+|`x`|디테일 페이지|시간, 능력 부족
+
+</table>
+
+
+<hr/>
+
 
 > A Vue.js project
 
