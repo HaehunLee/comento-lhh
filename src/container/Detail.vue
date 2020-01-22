@@ -2,8 +2,10 @@
     <!-- 상세 페이지 -->
     <div class="detail-page">
         <div>
-            <span class="category">{{getCatName()}}</span>
-            <span class="board-number">글번호 : {{detail.id}}</span>
+            <div class="detail-header">
+                <span class="category">{{getCatName()}}</span>
+                <span class="board-number">글번호 : {{detail.id}}</span>
+            </div>
 
             <div class="title">
                 <h4>제목</h4>
@@ -14,10 +16,12 @@
             <span>{{detail.updated_at}}</span>
 
             <div class="contents">
+                <h5>내용</h5>
                 {{detail.contents}}
             </div>
         </div>
         <div v-if="comments">
+            <span class="comment-header">댓글</span>
             <b-card v-for="reply in comments" :key="reply.no">
             <b-media>
                 <small>댓글 {{reply.id}}</small>
@@ -37,9 +41,9 @@ export default {
     data() {
         return {
             serverURL : 'https://1rcwozojf0.execute-api.ap-northeast-2.amazonaws.com/production', // api server URL 변수처리
-            detail : {},
-            comments : [],
-            category : [],
+            detail : {},    // 게시글 상세
+            comments : [],  // 상세 게시글 댓글
+            category : [],  // 카테고리
         }
     },
     created() {
@@ -49,6 +53,9 @@ export default {
         this.getCategory();
     },
     watch : {
+        detail() {
+            this.comments = this.detail.reply;  // 게시글 호출 시, 댓글 따로 관리
+        }
     },
     methods : {
         // 카테고리 리스트를 불러오는 함수
@@ -65,19 +72,17 @@ export default {
                 console.log('get category api err :', err)
             })
         },
+        // 게시글 상세를 불러오는 함수
         getDetail() {
             var self = this;
             this.$http.get(self.serverURL+`/api/view`, {
                 params : {
-                    id : self.$route.params.id,
+                    id : self.$route.params.id, // 쿼리스트링에서 id값을 받아옴.
                 }
             })
             .then((response) => {
                 // 성공 시
-                console.log('detail', response.data.info);
-                self.detail = response.data.info;
-                console.log('reply?', response.data.info.reply);
-                self.comments = response.data.info.reply
+                self.detail = response.data.info;   // 상세글 담기
             })
             .catch((err) => {
                 // 실패 시
@@ -99,23 +104,32 @@ export default {
     background-color: #EEEEEE;
     padding : 1%;
     .title {
-        font-size: 2rem;
-        margin-top: 2rem;
+        font-size: 30px;
+        margin-top: 20px;
+        margin-bottom : 20px;
     }
     .contents {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .detail-header {
+        width : 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
     }
     .category {
-        background: blue;
+        background: #AAAAAA;
         font-size: 20px;
         padding: 10px;
-        margin-right : 80%;
-        border-radius: 20px;
-        color: white;
+        border-radius: 10px;
+        color: black;
     }
-    .board-number {
-        float: right;
+    .comment-header {
+        margin-top : 10px;
+        margin-bottom : 10px;
+        font-size : 15px;
     }
 }
 </style>
