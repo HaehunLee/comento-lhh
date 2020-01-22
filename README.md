@@ -7,6 +7,7 @@
 <ol>
     <li>vue-cli : vue 프로젝트 초기 설정 라이브러리
     <li>axios : API 서버통신 라이브러리
+    <li>qs : Query String 쿼리 객체 변환 라이브러리
     <li>bootstrap, bootstrap-vue : bootstrap을 vue에서 사용하는 라이브러리
     <li>vue-infinite-scroll : 무한 스크롤 라이브러리
     <li>vue-router : router를 vue에서 사용하는 라이브러리 ( detail 미구현으로 미사용..)

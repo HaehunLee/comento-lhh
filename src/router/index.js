@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import List from '@/container/List'
-// import Detail from '@/components/Detail'
+import Detail from '@/container/Detail'
 
 Vue.use(Router)
 
@@ -12,11 +12,11 @@ export default new Router({
       name: 'List',
       component: List
     },
-    // 미구현 시간부족, 능력부족
-    // {
-    //   path: '/detail',
-    //   name: 'detail',
-    //   component: Detail
-    // }
+    {
+      path: '/detail/:id',
+      name: 'detail',
+      component: Detail,
+      props : true
+    }
   ]
 })

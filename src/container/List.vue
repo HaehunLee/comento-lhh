@@ -12,7 +12,9 @@
         </div>
         <div v-infinite-scroll="showMore" infinite-scroll-disabled="loading" infinite-scroll-distance="pageLimit">
             <div v-for="(board, index) in boards" :key="index">
-                <board :board="board" :category="category" />
+                <router-link class="detail-link" :to="{path: '/detail/'+board.id}">
+                    <board :board="board" :category="category" />
+                </router-link>
                 <sponsored :turn="index" :getSponsored="getSponsored"/>
             </div>
         </div>
@@ -185,5 +187,10 @@ export default {
     h5.active {
         color : @red;
     }
+}
+
+.detail-link {
+  text-decoration: none;
+  color: black;
 }
 </style>
