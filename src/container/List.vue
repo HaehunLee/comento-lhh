@@ -86,15 +86,25 @@ export default {
         },
         // 게시글 리스트 불러오는 함수
         getBoards() {
+            var qs = require('qs');
             var self = this;
             // 무한 스크롤 시 중복 방지 로딩
             this.loading = true;
+            console.log('get Boards : ', typeof(self.filterCategory));
+
+            var category = JSON.parse(JSON.stringify(self.filterCategory))
+            console.log(category)
+
             this.$http.get(self.serverURL+`/api/list`, {
                 params : {
                     page : 1,
                     ord : self.ord,
                     category : self.filterCategory,
                     limit : self.pageLimit
+                },
+                // 쿼리스트링 array 파람값 에러 해결 qs이용.
+                paramsSerializer: params => {
+                    return qs.stringify(params)
                 }
             })
             .then((response) => {
@@ -148,7 +158,9 @@ export default {
         },
         // filter 저장 시 필터 체크 함수
         confirmFilter(value) {
+            console.log('confrim filter : ', value);
             this.filterCategory = value;
+            console.log('filter category confirm : ', this.filterCategory);
         },
     },
 }

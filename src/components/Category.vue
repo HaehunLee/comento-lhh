@@ -46,6 +46,7 @@ export default {
         // filter값을 저장하는 함수
         refreshFilter() {
             // Container에 selected 전달
+            console.log('change filter : ', this.selected);
             this.$emit("filter",this.selected);
             this.toggleModal();
         }
