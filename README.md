@@ -2,6 +2,19 @@
 - comento practice
 - dev : 이해훈
 
+## 크로스 브라우징
+<table>
+
+| 대응 브라우저 | 버전 | 테스트 |
+|---|:---:|:---:|
+|Chrome|79.0.3945.117|`o`
+|Safari|13.0.4|`o`
+|FireFox|72.0.2|`o`
+|IE|확인중..|
+|Edge|확인중..|
+
+</table>
+
 ## Use Library
 
 <ol>
