@@ -1,3 +1,6 @@
+// IE 11 Cross Browsing
+import 'babel-polyfill'
+
 import Vue from 'vue'
 import App from './App'
 import router from './router'
