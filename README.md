@@ -25,6 +25,7 @@
     <li>vue-infinite-scroll : 무한 스크롤 라이브러리
     <li>vue-router : router를 vue에서 사용하는 라이브러리
     <li>babel-polyfill : polyfill을 전역으로 사용할 수 있게하는 라이브러리 ( IE 11 크로스 브라우징에 사용 )
+    <li>vue-full-loading : loading spinner 라이브러리
 </ol>
 
 ## Goal

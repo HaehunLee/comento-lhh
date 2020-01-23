@@ -36,6 +36,8 @@
 <script>
 
 // Detail Component
+import EventBus from '@/modules/EventBus'
+
 export default {
     name : 'Detail',
     data() {
@@ -74,6 +76,7 @@ export default {
         },
         // 게시글 상세를 불러오는 함수
         getDetail() {
+            EventBus.$emit('start:loading');    //  로딩 시작
             var self = this;
             this.$http.get(self.serverURL+`/api/view`, {
                 params : {
@@ -83,10 +86,12 @@ export default {
             .then((response) => {
                 // 성공 시
                 self.detail = response.data.info;   // 상세글 담기
+                EventBus.$emit('end:loading'); 
             })
             .catch((err) => {
                 // 실패 시
                 console.log('get detail api err :', err)
+                EventBus.$emit('end:loading');
             })
         },
         // 카테고리 이름 변환 함수

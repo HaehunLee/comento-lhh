@@ -33,6 +33,8 @@
 import Category from '../components/Category'
 import Board from '../components/Board'
 import Sponsored from '../components/Sponsored'
+import EventBus from '@/modules/EventBus'
+
 export default {
     name : 'List',
     components : {
@@ -75,6 +77,7 @@ export default {
     methods : {
         // 카테고리 리스트를 불러오는 함수
         getCategory() {
+            EventBus.$emit('start:loading');    // 로딩 시작
             var self = this;
             var tempCategory = [];
             this.$http.get(self.serverURL+`/api/category`)
@@ -87,14 +90,17 @@ export default {
                 ))
                 // 바뀐 카테고리 필터값 저장
                 self.filterCategory = tempCategory;
+                EventBus.$emit('end:loading');
             })
             .catch((err) => {
                 // 실패 시
                 console.log('get category api err :', err)
+                EventBus.$emit('end:loading');
             })
         },
         // 게시글 리스트 불러오는 함수
         getBoards() {
+            EventBus.$emit('start:loading');
             var qs = require('qs');
             var self = this;
             // 무한 스크롤 시 중복 방지 로딩
@@ -118,11 +124,13 @@ export default {
                 // SUCCESS
                 self.boards = response.data.list.data
                 self.loading = false;
+                EventBus.$emit('end:loading');
             })
             .catch((err) => {
                 // 실패 시
                 console.log('get boards api err :', err)
                 self.loading = false;
+                EventBus.$emit('end:loading');
             })
         },
         // 광고글 불러오는 함수
