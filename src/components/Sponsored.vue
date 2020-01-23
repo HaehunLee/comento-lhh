@@ -73,7 +73,8 @@ export default {
     }
 
     // width 450px 이하일 때 반응형 css
-    @media all and ( max-width : 450px ){
+    @media all and ( max-width : 480px ){
+        // 이미지 비율 유지
         .sponsored-container img {
             width: -webkit-fill-available;
         }

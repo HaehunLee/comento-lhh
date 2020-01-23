@@ -10,6 +10,13 @@
                 <h5 v-on:click="toggleOrd" :class="{active: ord=='desc'}">내림차순</h5>
             </div>
         </div>
+        <!-- VOC No. 27 -->
+        <div class="show-category">현재 카테고리 : 
+            <span v-for="(list,index) in showCateName" :key="index">
+                {{list}}
+            </span>
+        </div>
+
         <div v-infinite-scroll="showMore" infinite-scroll-disabled="loading" infinite-scroll-distance="pageLimit">
             <div v-for="(board, index) in boards" :key="index">
                 <router-link class="detail-link" :to="{path: '/detail/'+board.id}">
@@ -42,6 +49,7 @@ export default {
             filterCategory : [1,2,3],   // 필터할 카테고리 id
             ord : 'asc',    // 정렬 기본값 오름차순
             modalShow : false,  // 필터 모달 view 유무
+            showCateName : [],
         }
     },
     created() {
@@ -61,6 +69,7 @@ export default {
         },
         filterCategory() {
                 this.getBoards();   // 필터값 변경 시 게시글 업데이트
+                this.showCategory();
         }
     },
     methods : {
@@ -72,14 +81,12 @@ export default {
             .then((response) => {
                 // 성공 시
                 self.category = response.data.list
-                console.log('list :', self.list)
 
                 response.data.list.map((list) => (
                     tempCategory.push(list.id)
                 ))
                 // 바뀐 카테고리 필터값 저장
                 self.filterCategory = tempCategory;
-                console.log('filter category : ', self.filterCategory)
             })
             .catch((err) => {
                 // 실패 시
@@ -92,10 +99,8 @@ export default {
             var self = this;
             // 무한 스크롤 시 중복 방지 로딩
             this.loading = true;
-            console.log('get Boards : ', typeof(self.filterCategory));
 
             var category = JSON.parse(JSON.stringify(self.filterCategory))
-            console.log(category)
 
             this.$http.get(self.serverURL+`/api/list`, {
                 params : {
@@ -111,7 +116,6 @@ export default {
             })
             .then((response) => {
                 // SUCCESS
-                console.log('boards', response)
                 self.boards = response.data.list.data
                 self.loading = false;
             })
@@ -160,10 +164,20 @@ export default {
         },
         // filter 저장 시 필터 체크 함수
         confirmFilter(value) {
-            console.log('confrim filter : ', value);
             this.filterCategory = value;
-            console.log('filter category confirm : ', this.filterCategory);
         },
+        // VOC No.27 현재 카테고리 보기
+        showCategory() {
+            var tempName = [];
+            this.category.map(list1 => (
+                this.filterCategory.map(list2 => {
+                    if(list1.id === list2) {
+                        tempName.push(list1.name)
+                    }
+                }
+            )))
+            this.showCateName = tempName
+        }
     },
 }
 </script>
@@ -192,5 +206,9 @@ export default {
 .detail-link {
   text-decoration: none;
   color: black;
+}
+
+.show-category {
+    text-align: left;
 }
 </style>
