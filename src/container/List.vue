@@ -210,5 +210,8 @@ export default {
 
 .show-category {
     text-align: left;
+    span {
+        color : red;
+    }
 }
 </style>

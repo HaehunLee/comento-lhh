@@ -124,7 +124,7 @@ export default {
         font-size: 20px;
         padding: 10px;
         border-radius: 10px;
-        color: black;
+        color: red;
     }
     .comment-header {
         margin-top : 10px;
