@@ -1,4 +1,4 @@
-# comento-lhh
+# Vue.js를 이용한 광고성 게시글 프로젝트
 - COMENTO CODING TEST
 - Dev : LEE HAE HUN
 
