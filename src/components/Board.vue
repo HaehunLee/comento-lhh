@@ -7,7 +7,7 @@
         >
             <template v-slot:header>
                 <div class="board-title">
-                    <h6 class="mb-0 board-header">{{getCatName()}}</h6>
+                    <h6 class="mb-0 board-header">카테고리 : {{getCatName()}}</h6>
                     <h6 class="mb-0 board-header">글번호 : {{board.id}}</h6>
                 </div>
             </template>

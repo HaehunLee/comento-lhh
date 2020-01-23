@@ -59,7 +59,7 @@ export default {
 }
 
 .loader-wrapper { 
-  right : 40% !important;
+  right : 45% !important;
   bottom : 50% !important;
 }
 </style>
